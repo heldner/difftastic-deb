@@ -1,0 +1,7 @@
+difft (0.62.0-2) stable; urgency=low
+
+  * difft 0.62.0
+  * debian:
+    - first release
+
+ -- Stanislav Korolev <stan.korolev@mail.ru>  Sat, 21 Dec 2024 11:49:22 +0300

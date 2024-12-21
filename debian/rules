@@ -1,0 +1,32 @@
+#!/usr/bin/make -f
+
+export DEB_BUILD_OPTIONS = noautodbgsym
+
+SHELL := sh -e
+VERSION ?= 0.62.0
+ARCHIVE := difft-x86_64-unknown-linux-gnu.tar.gz
+
+%:
+	dh ${@}
+
+override_dh_auto_clean:
+	rm -f config.h
+	$(MAKE) clean
+
+$(ARCHIVE):
+	curl -s -L -O https://github.com/Wilfred/difftastic/releases/download/$(VERSION)/$(ARCHIVE)
+
+difft: $(ARCHIVE)
+	tar xzf $(ARCHIVE)
+
+override_dh_auto_build: difft
+
+override_dh_auto_install:
+	mkdir -p debian/difft/usr/bin
+	cp difft debian/difft/usr/bin
+
+#override_dh_strip:
+#	true
+#
+#override_dh_shlibdeps:
+#	true
